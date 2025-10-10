@@ -31,7 +31,16 @@ export default function RegisterPage() {
 
   return (
     <div className="container">
-      <h1 className="text-2xl font-semibold mb-6">Criar conta</h1>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-semibold">Criar conta</h1>
+        <button
+          type="button"
+          className="rounded bg-gray-700 hover:bg-gray-600 px-3 py-2"
+          onClick={() => router.push('/')}
+        >
+          Voltar para login
+        </button>
+      </div>
       <form onSubmit={onSubmit} className="space-y-4">
         <div>
           <label className="block text-sm mb-1">Nome</label>
@@ -72,9 +81,6 @@ export default function RegisterPage() {
         >
           {loading ? 'Criando...' : 'Criar conta'}
         </button>
-        <p className="text-sm text-gray-400">
-          Já tem conta? <a href="/" className="text-blue-400 hover:underline">Fazer login</a>
-        </p>
       </form>
     </div>
   );
