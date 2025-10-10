@@ -1,0 +1,12 @@
+{
+  "name": "identity-profiles",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:api": "npm --workspace apps/api run dev",
+    "start:api": "npm --workspace apps/api run start"
+  }
+}
