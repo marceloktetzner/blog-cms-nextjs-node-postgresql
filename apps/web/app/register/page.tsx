@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { apiRegister } from '../../lib/api';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -21,7 +22,7 @@ export default function RegisterPage() {
     try {
       await apiRegister({ name, email, password });
       setSuccess('Conta criada com sucesso. Faça login.');
-      setTimeout(() => router.push('/'), 800);
+      setTimeout(() => router.push('/login'), 800);
     } catch (err: any) {
       setError(err?.message || 'Falha no registro');
     } finally {
@@ -81,6 +82,9 @@ export default function RegisterPage() {
         >
           {loading ? 'Criando...' : 'Criar conta'}
         </button>
+        <p className="text-sm text-gray-400">
+          <Link href="/" className="text-blue-400 hover:underline">Voltar para Home</Link>
+        </p>
       </form>
     </div>
   );
