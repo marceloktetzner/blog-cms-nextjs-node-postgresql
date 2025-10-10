@@ -18,7 +18,7 @@ export function Header() {
             </Link>
           </nav>
 
-          <Link href="/" className="inline-flex items-center justify-center rounded border border-border/50 px-3 py-2 text-sm transition-colors hover:border-accent/50">
+          <Link href="/login" className="inline-flex items-center justify-center rounded border border-border/50 px-3 py-2 text-sm transition-colors hover:border-accent/50">
             Login
           </Link>
         </div>
