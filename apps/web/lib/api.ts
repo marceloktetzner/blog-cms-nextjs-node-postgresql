@@ -24,3 +24,16 @@ export async function apiGetMe(token: string) {
   }
   return res.json();
 }
+
+export async function apiRegister(body: { name?: string; email: string; password: string }) {
+  const res = await fetch(`${API_URL}/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err?.error || 'Falha no registro');
+  }
+  return res.json();
+}
