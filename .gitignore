@@ -19,3 +19,6 @@ Thumbs.db
 # Build
 build/
 dist/
+
+# Next.js build (web app)
+apps/web/.next/
