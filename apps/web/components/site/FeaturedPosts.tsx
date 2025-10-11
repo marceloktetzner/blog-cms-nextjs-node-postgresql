@@ -80,15 +80,15 @@ export async function FeaturedPosts() {
           ) : (
             posts.map((post: PostItem) => (
               <Link key={post.id} href={`/posts/${post.slug}`} className="group">
-                <div className="h-full rounded border border-border/40 bg-card/50 p-6 transition-all hover:border-primary/40 hover:bg-white">
+                <div className="h-full rounded-lg border border-border/40 bg-card/50 p-6 transition-all duration-300 will-change-transform hover:border-blue-500 dark:hover:border-red-500 hover:-translate-y-0.5">
                   <div className="flex h-full flex-col">
                     <div className="mb-4 flex items-center justify-between">
-                      <span className="text-xs font-medium text-primary/80 group-hover:text-primary">
+                      <span className="text-xs font-medium text-primary/70 transition-colors duration-300 group-hover:text-blue-600 dark:group-hover:text-red-400 group-hover:font-semibold">
                         {post.category || 'Artigo'}
                       </span>
                     </div>
 
-                    <h3 className="mb-3 text-balance text-xl font-semibold leading-tight group-hover:text-primary">
+                    <h3 className="mb-3 text-balance text-xl font-semibold leading-tight transition-colors duration-300 group-hover:text-blue-600 dark:group-hover:text-red-400">
                       {post.title}
                     </h3>
 

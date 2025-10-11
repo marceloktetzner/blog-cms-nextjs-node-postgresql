@@ -49,10 +49,10 @@ export default function PostTable({ posts, page, pageSize, onPageChange, onDelet
               </tr>
             ) : (
               slice.map((post) => (
-                <tr key={post.id} className="border-t border-border/40">
+                <tr key={post.id} className="border-t border-border/40 transition-colors duration-200 hover:bg-accent/20 dark:hover:bg-accent/10 group">
                   <td className="px-4 py-3">
-                    <div className="font-medium">{post.title}</div>
-                    {post.excerpt && <div className="text-xs text-muted-foreground mt-1 line-clamp-1">{post.excerpt}</div>}
+                    <div className="font-medium transition-colors duration-200 group-hover:text-blue-600 dark:group-hover:text-red-400">{post.title}</div>
+                    {post.excerpt && <div className="text-xs text-muted-foreground mt-1 line-clamp-1 transition-colors duration-200 group-hover:text-foreground/70 dark:group-hover:text-foreground/80">{post.excerpt}</div>}
                   </td>
                   <td className="px-4 py-3">
                     <span
@@ -75,7 +75,7 @@ export default function PostTable({ posts, page, pageSize, onPageChange, onDelet
                       {/* Se houver rota por slug, ajuste o href */}
                       <Link
                         href={"/posts/" + post.id}
-                        className="rounded border border-border/50 px-2 py-1 text-xs hover:bg-foreground/5"
+                        className="rounded border border-border/50 px-2 py-1 text-xs transition-all duration-200 hover:text-blue-600 dark:hover:text-red-400 hover:border-blue-500 dark:hover:border-red-500 hover:-translate-y-0.5"
                       >
                         Ver
                       </Link>
@@ -83,7 +83,7 @@ export default function PostTable({ posts, page, pageSize, onPageChange, onDelet
                         <button
                           onClick={() => onDelete(post.id)}
                           disabled={deletingId === post.id}
-                          className="rounded border border-destructive/50 px-2 py-1 text-xs text-destructive hover:bg-destructive/10 disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="rounded border border-destructive/50 px-2 py-1 text-xs text-destructive transition-all duration-200 hover:bg-destructive/10 hover:border-destructive hover:shadow-sm dark:hover:bg-destructive/20 disabled:opacity-50 disabled:cursor-not-allowed"
                           title={deletingId === post.id ? 'Excluindo...' : 'Excluir'}
                         >
                           {deletingId === post.id ? 'Excluindo...' : 'Excluir'}
@@ -114,7 +114,7 @@ export default function PostTable({ posts, page, pageSize, onPageChange, onDelet
           <button
             onClick={() => onPageChange(Math.max(1, clampedPage - 1))}
             disabled={clampedPage === 1}
-            className="rounded border border-border/50 px-2 py-1 disabled:opacity-50 hover:bg-foreground/5"
+            className="rounded border border-border/50 px-2 py-1 transition-all duration-200 disabled:opacity-50 hover:bg-primary/10 hover:border-primary/50 hover:text-primary"
           >
             Anterior
           </button>
@@ -124,7 +124,7 @@ export default function PostTable({ posts, page, pageSize, onPageChange, onDelet
           <button
             onClick={() => onPageChange(Math.min(totalPages, clampedPage + 1))}
             disabled={clampedPage === totalPages}
-            className="rounded border border-border/50 px-2 py-1 disabled:opacity-50 hover:bg-foreground/5"
+            className="rounded border border-border/50 px-2 py-1 transition-all duration-200 disabled:opacity-50 hover:bg-primary/10 hover:border-primary/50 hover:text-primary"
           >
             Próxima
           </button>

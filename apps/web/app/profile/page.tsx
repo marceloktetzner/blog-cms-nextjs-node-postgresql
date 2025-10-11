@@ -110,7 +110,7 @@ export default function ProfilePage() {
             {!isEditing && (
               <button
                 onClick={() => setIsEditing(true)}
-                className="rounded bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+                className="rounded border border-border/50 px-4 py-2 text-sm font-medium transition-all hover:text-blue-600 dark:hover:text-red-400 hover:border-blue-500 dark:hover:border-red-500 hover:-translate-y-0.5"
               >
                 Editar
               </button>
