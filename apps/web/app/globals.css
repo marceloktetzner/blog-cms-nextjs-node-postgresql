@@ -82,4 +82,23 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Normaliza aparência de autofill (Chrome/WebKit) para manter mesmo tom dos inputs */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  select:-webkit-autofill {
+    -webkit-text-fill-color: var(--foreground);
+    /* pinta o fundo do campo autofill para combinar com bg-secondary */
+    -webkit-box-shadow: 0 0 0px 1000px var(--secondary) inset;
+            box-shadow: 0 0 0px 1000px var(--secondary) inset;
+    transition: background-color 9999s ease-out;
+  }
+
+  /* Placeholder consistente */
+  ::placeholder {
+    color: var(--muted-foreground);
+    opacity: 1;
+  }
 }
