@@ -25,7 +25,7 @@ export async function apiGetMe(token: string) {
   return res.json();
 }
 
-export async function apiRegister(body: { name?: string; email: string; password: string }) {
+export async function apiRegister(body: { name?: string; email: string; password: string; role?: string }) {
   const res = await fetch(`${API_URL}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

@@ -10,6 +10,7 @@ export default function RegisterPage() {
   const [name, setName] = useState('User');
   const [email, setEmail] = useState('user@example.com');
   const [password, setPassword] = useState('secret123');
+  const [role, setRole] = useState('USER');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -20,7 +21,7 @@ export default function RegisterPage() {
     setError(null);
     setSuccess(null);
     try {
-      await apiRegister({ name, email, password });
+      await apiRegister({ name, email, password, role });
       setSuccess('Conta criada com sucesso. Faça login.');
       setTimeout(() => router.push('/login'), 800);
     } catch (err: any) {
@@ -76,6 +77,19 @@ export default function RegisterPage() {
                 required
                 className="w-full rounded border border-border bg-secondary/50 px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-500"
               />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="role" className="text-sm">Tipo de conta (para teste)</label>
+              <select
+                id="role"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="w-full rounded border border-border bg-secondary/50 px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-500"
+              >
+                <option value="USER">Usuário</option>
+                <option value="EDITOR">Editor</option>
+                <option value="ADMIN">Administrador</option>
+              </select>
             </div>
             {error && (
               <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20">

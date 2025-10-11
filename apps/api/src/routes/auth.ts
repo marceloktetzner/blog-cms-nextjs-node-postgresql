@@ -12,13 +12,13 @@ router.post('/register', async (req: Request, res: Response) => {
   if (!parsed.success) {
     return res.status(400).json({ error: parsed.error.flatten() });
   }
-  const { email, name, password } = parsed.data;
+  const { email, name, password, role } = parsed.data;
 
   const existing = await prisma.user.findUnique({ where: { email } });
   if (existing) return res.status(409).json({ error: 'email already in use' });
 
   const passwordHash = await bcrypt.hash(password, 10);
-  const user = await prisma.user.create({ data: { email, name, passwordHash } });
+  const user = await prisma.user.create({ data: { email, name, passwordHash, role } });
 
   return res.status(201).json({ id: user.id, email: user.email, name: user.name });
 });
