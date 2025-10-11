@@ -31,8 +31,9 @@ export default function ThemeToggle() {
     <button
       onClick={toggle}
       aria-label="Alternar tema"
-      className="inline-flex items-center gap-2 rounded border border-border/50 bg-card/50 px-3 py-2 text-sm transition-colors
-                 hover:bg-primary/10 hover:text-primary hover:border-primary focus:outline-none focus:ring-2 focus:ring-ring/60 active:bg-primary/15"
+      className="inline-flex items-center gap-2 rounded border border-border/50 bg-card/50 px-3 py-2 text-sm transition-all
+                 hover:text-blue-600 dark:hover:text-red-400 hover:border-blue-500 dark:hover:border-red-500 hover:-translate-y-0.5
+                 focus:outline-none focus:ring-2 focus:ring-ring/60"
     >
       <span className="text-lg leading-none">{theme === "dark" ? "☀️" : "🌙"}</span>
       <span className="hidden md:inline">{theme === "dark" ? "Light" : "Dark"}</span>

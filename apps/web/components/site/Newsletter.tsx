@@ -18,9 +18,9 @@ export function Newsletter() {
             />
             <button
               type="submit"
-              className="inline-flex items-center justify-center rounded border border-border/50 px-5 py-3 text-base transition-colors hover:border-accent/50"
+              className="inline-flex items-center justify-center rounded border border-border/50 px-5 py-3 text-base transition-all hover:text-blue-600 dark:hover:text-red-400 hover:border-blue-500 dark:hover:border-red-500 hover:-translate-y-0.5"
             >
-              Login
+              Enviar
             </button>
           </form>
 
