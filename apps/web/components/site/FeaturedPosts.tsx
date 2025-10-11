@@ -88,7 +88,7 @@ export async function FeaturedPosts() {
                       </span>
                     </div>
 
-                    <h3 className="mb-3 text-balance text-xl font-semibold leading-tight transition-colors duration-300 group-hover:text-blue-600 dark:group-hover:text-red-400">
+                    <h3 className="mb-3 text-balance text-2xl font-semibold leading-snug tracking-tight line-clamp-2 transition-colors duration-300 group-hover:text-blue-600 dark:group-hover:text-red-400 group-hover:underline underline-offset-4 decoration-2 decoration-blue-500 dark:decoration-red-500">
                       {post.title}
                     </h3>
 
