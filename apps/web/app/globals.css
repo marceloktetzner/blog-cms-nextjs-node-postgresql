@@ -3,39 +3,41 @@
 @tailwind utilities;
 
 :root {
-  --background: oklch(0.12 0 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.15 0 0);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.15 0 0);
-  --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.95 0 0);
-  --primary-foreground: oklch(0.12 0 0);
-  --secondary: oklch(0.22 0 0);
-  --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.22 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.75 0.15 30);
-  --accent-foreground: oklch(0.12 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.95 0 0);
-  --border: oklch(0.22 0 0);
-  --input: oklch(0.22 0 0);
-  --ring: oklch(0.45 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  /* Light theme (bright, airy, material-like) */
+  --background: #f4f7ff; /* page background */
+  --foreground: #0b1324; /* main text */
+  --card: #ffffff;
+  --card-foreground: #0b1324;
+  --popover: #ffffff;
+  --popover-foreground: #0b1324;
+  --primary: #1976d2; /* blue 700 for stronger contrast */
+  --primary-foreground: #ffffff;
+  --secondary: #eef3ff; /* light blue/grey with more body */
+  --secondary-foreground: #0b1324;
+  --muted: #e1e7f3; /* subtle surfaces with more contrast */
+  --muted-foreground: #334155; /* darker muted text (slate-700) */
+  --accent: #e2ecff; /* soft accent slightly stronger */
+  --accent-foreground: #0b1324;
+  --destructive: #d32f2f;
+  --destructive-foreground: #ffffff;
+  --border: #cbd5e1; /* stronger light border */
+  --input: #cbd5e1;
+  --ring: #1e88e5; /* focus ring primary for accessibility */
+  --chart-1: #42a5f5;
+  --chart-2: #66bb6a;
+  --chart-3: #ffca28;
+  --chart-4: #ab47bc;
+  --chart-5: #ef5350;
   --radius: 0.5rem;
-  --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* Sidebar (light) */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0b1324;
+  --sidebar-primary: #1e88e5;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f2f6ff;
+  --sidebar-accent-foreground: #0b1324;
+  --sidebar-border: #d8e2f0;
+  --sidebar-ring: #1e88e5;
 }
 
 .dark {
@@ -69,7 +71,6 @@
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
 }
 
@@ -83,6 +84,14 @@
     @apply bg-background text-foreground;
   }
 
+  /* Garante que o texto digitado em campos de formulário seja visível */
+  input,
+  textarea,
+  select {
+    color: #000000; /* preto */
+    caret-color: #000000;
+  }
+
   /* Normaliza aparência de autofill (Chrome/WebKit) para manter mesmo tom dos inputs */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
@@ -93,12 +102,11 @@
     /* pinta o fundo do campo autofill para combinar com bg-secondary */
     -webkit-box-shadow: 0 0 0px 1000px var(--secondary) inset;
             box-shadow: 0 0 0px 1000px var(--secondary) inset;
-    transition: background-color 9999s ease-out;
   }
 
   /* Placeholder consistente */
   ::placeholder {
-    color: var(--muted-foreground);
+    color: color-mix(in oklab, var(--muted-foreground), #000 10%);
     opacity: 1;
   }
 }

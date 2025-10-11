@@ -1,57 +1,69 @@
 import Link from "next/link"
 
-const posts = [
-  {
-    category: "Design",
-    title: "O poder dos detalhes em interfaces",
-    description: "Como pequenos ajustes podem transformar completamente a experiência do usuário.",
-    date: "15 Mar 2024",
-    readTime: "5 min",
-    href: "/posts/poder-dos-detalhes",
-  },
-  {
-    category: "Desenvolvimento",
-    title: "Server Components no Next.js 15",
-    description: "Explorando os novos padrões de renderização e como eles melhoram a performance.",
-    date: "10 Mar 2024",
-    readTime: "8 min",
-    href: "/posts/server-components",
-  },
-  {
-    category: "Tutorial",
-    title: "Criando animações fluidas com Framer Motion",
-    description: "Um guia prático para adicionar micro-interações que encantam.",
-    date: "5 Mar 2024",
-    readTime: "12 min",
-    href: "/posts/animacoes-framer-motion",
-  },
-  {
-    category: "Reflexão",
-    title: "Minimalismo funcional",
-    description: "Por que menos é mais quando se trata de design de interfaces modernas.",
-    date: "1 Mar 2024",
-    readTime: "6 min",
-    href: "/posts/minimalismo-funcional",
-  },
-  {
-    category: "Desenvolvimento",
-    title: "TypeScript avançado para React",
-    description: "Padrões e técnicas para escrever código type-safe e escalável.",
-    date: "25 Fev 2024",
-    readTime: "10 min",
-    href: "/posts/typescript-avancado",
-  },
-  {
-    category: "Design",
-    title: "Sistemas de design que escalam",
-    description: "Como construir e manter design systems para produtos em crescimento.",
-    date: "20 Fev 2024",
-    readTime: "7 min",
-    href: "/posts/design-systems",
-  },
-]
+interface PostItem {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt?: string;
+  publishedAt: string;
+  content?: string;
+  category?: string;
+}
 
-export function FeaturedPosts() {
+// Posts mock como fallback
+const mockPosts = [
+  {
+    id: "1",
+    slug: "poder-dos-detalhes",
+    title: "O poder dos detalhes em interfaces",
+    excerpt: "Como pequenos ajustes podem transformar completamente a experiência do usuário.",
+    publishedAt: "2024-03-15T10:00:00Z",
+    content: "Lorem ipsum dolor sit amet...",
+    category: "Design"
+  },
+  {
+    id: "2", 
+    slug: "server-components",
+    title: "Server Components no Next.js 15",
+    excerpt: "Explorando os novos padrões de renderização e como eles melhoram a performance.",
+    publishedAt: "2024-03-10T10:00:00Z",
+    content: "Lorem ipsum dolor sit amet...",
+    category: "Desenvolvimento"
+  },
+  {
+    id: "3",
+    slug: "animacoes-framer-motion", 
+    title: "Criando animações fluidas com Framer Motion",
+    excerpt: "Um guia prático para adicionar micro-interações que encantam.",
+    publishedAt: "2024-03-05T10:00:00Z",
+    content: "Lorem ipsum dolor sit amet...",
+    category: "Tutorial"
+  }
+];
+
+async function getPosts() {
+  const api = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+  try {
+    const res = await fetch(`${api}/posts?page=1&pageSize=6`, { 
+      next: { revalidate: 30 },
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    if (!res.ok) {
+      console.log('API não disponível, usando posts mock');
+      return { items: mockPosts };
+    }
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log('Erro ao buscar posts da API, usando posts mock:', error);
+    return { items: mockPosts };
+  }
+}
+
+export async function FeaturedPosts() {
+  const { items: posts } = await getPosts();
   return (
     <section className="border-t border-border/40 bg-secondary/20 py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,31 +73,43 @@ export function FeaturedPosts() {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <Link key={post.href} href={post.href} className="group">
-              <div className="h-full rounded border border-border/40 bg-card/50 p-6 transition-all hover:border-accent/50 hover:bg-card">
-                <div className="flex h-full flex-col">
-                  <div className="mb-4 flex items-center justify-between">
-                    <span className="text-xs font-medium text-accent">{post.category}</span>
-                  </div>
+          {posts.length === 0 ? (
+            <div className="col-span-full text-center py-12">
+              <p className="text-muted-foreground">Nenhum post publicado ainda.</p>
+            </div>
+          ) : (
+            posts.map((post: PostItem) => (
+              <Link key={post.id} href={`/posts/${post.slug}`} className="group">
+                <div className="h-full rounded border border-border/40 bg-card/50 p-6 transition-all hover:border-primary/40 hover:bg-white">
+                  <div className="flex h-full flex-col">
+                    <div className="mb-4 flex items-center justify-between">
+                      <span className="text-xs font-medium text-primary/80 group-hover:text-primary">
+                        {post.category || 'Artigo'}
+                      </span>
+                    </div>
 
-                  <h3 className="mb-3 text-balance text-xl font-semibold leading-tight group-hover:text-accent">
-                    {post.title}
-                  </h3>
+                    <h3 className="mb-3 text-balance text-xl font-semibold leading-tight group-hover:text-primary">
+                      {post.title}
+                    </h3>
 
-                  <p className="mb-4 flex-1 text-pretty text-sm leading-relaxed text-muted-foreground">
-                    {post.description}
-                  </p>
+                    <p className="mb-4 flex-1 text-pretty text-sm leading-relaxed text-muted-foreground">
+                      {post.excerpt || 'Sem descrição disponível.'}
+                    </p>
 
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                    <span>{post.date}</span>
-                    <span>•</span>
-                    <span>{post.readTime}</span>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <span>
+                        {new Date(post.publishedAt).toLocaleDateString('pt-BR')}
+                      </span>
+                      <span>•</span>
+                      <span>
+                        {Math.ceil((post.content?.length || 500) / 1000)} min
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))
+          )}
         </div>
       </div>
     </section>
