@@ -29,7 +29,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <div className="w-full max-w-md rounded border border-border/50 bg-card/50 shadow-xl">
+      <div className="w-[420px] rounded border border-border/50 bg-card/50 shadow-xl">
         <div className="space-y-1 border-b border-border/40 p-6">
           <h1 className="text-3xl font-bold text-center">Bem-vindo</h1>
           <p className="text-center text-sm text-muted-foreground">

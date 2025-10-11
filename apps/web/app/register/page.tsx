@@ -31,61 +31,83 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="container">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold">Criar conta</h1>
-        <button
-          type="button"
-          className="rounded bg-gray-700 hover:bg-gray-600 px-3 py-2"
-          onClick={() => router.push('/')}
-        >
-          Voltar para login
-        </button>
+    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+      <div className="w-[420px] rounded border border-border/50 bg-card/50 shadow-xl">
+        <div className="space-y-1 border-b border-border/40 p-6">
+          <h1 className="text-3xl font-bold text-center">Criar conta</h1>
+          <p className="text-center text-sm text-muted-foreground">
+            Preencha os dados abaixo para começar
+          </p>
+        </div>
+        <div className="p-6">
+          <form onSubmit={onSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="name" className="text-sm">Nome</label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Seu nome"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                className="w-full rounded border border-border bg-secondary/50 px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-500"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-sm">Email</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="seu@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full rounded border border-border bg-secondary/50 px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-500"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="password" className="text-sm">Senha</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full rounded border border-border bg-secondary/50 px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-500"
+              />
+            </div>
+            {error && (
+              <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                <p className="text-sm text-destructive-foreground">{error}</p>
+              </div>
+            )}
+            {success && (
+              <div className="p-3 rounded-lg border border-green-400/20 bg-green-400/10">
+                <p className="text-sm text-green-300">{success}</p>
+              </div>
+            )}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full rounded bg-primary px-3 py-2 font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+            >
+              {loading ? "Criando..." : "Criar conta"}
+            </button>
+          </form>
+        </div>
+        <div className="flex flex-col items-center gap-2 border-t border-border/40 p-6 text-sm text-muted-foreground">
+          <div>
+            Já tem conta? {" "}
+            <Link href="/login" className="text-foreground hover:underline font-medium">
+              Fazer login
+            </Link>
+          </div>
+          <Link href="/" className="hover:text-foreground transition-colors">
+            ← Voltar para Home
+          </Link>
+        </div>
       </div>
-      <form onSubmit={onSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm mb-1">Nome</label>
-          <input
-            className="w-full rounded border border-gray-700 bg-gray-900 px-3 py-2 focus:outline-none focus:ring focus:border-blue-500"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label className="block text-sm mb-1">Email</label>
-          <input
-            className="w-full rounded border border-gray-700 bg-gray-900 px-3 py-2 focus:outline-none focus:ring focus:border-blue-500"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-sm mb-1">Senha</label>
-          <input
-            className="w-full rounded border border-gray-700 bg-gray-900 px-3 py-2 focus:outline-none focus:ring focus:border-blue-500"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            minLength={6}
-          />
-        </div>
-        {error && <p className="text-red-400 text-sm">{error}</p>}
-        {success && <p className="text-green-400 text-sm">{success}</p>}
-        <button
-          className="w-full rounded bg-blue-600 hover:bg-blue-500 px-3 py-2 font-medium disabled:opacity-50"
-          disabled={loading}
-          type="submit"
-        >
-          {loading ? 'Criando...' : 'Criar conta'}
-        </button>
-        <p className="text-sm text-gray-400">
-          <Link href="/" className="text-blue-400 hover:underline">Voltar para Home</Link>
-        </p>
-      </form>
     </div>
   );
 }
