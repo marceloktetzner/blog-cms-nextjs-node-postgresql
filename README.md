@@ -1,6 +1,6 @@
 # Identity & Profiles
 
-Monorepo para o projeto Identity & Profiles (API em TypeScript com Express).
+Blog + CMS full‑stack com Next.js, Node e PostgreSQL
 
 ## Estrutura
 - `apps/api`: API REST (Express + TS)
